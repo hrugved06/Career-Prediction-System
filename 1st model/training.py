@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import tree, svm
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix,accuracy_score
+from xgboost import XGBClassifier
 import pickle
 
 
@@ -69,6 +70,10 @@ clf2 = clf2.fit(x_train, y_train)
 clf3 = RandomForestClassifier(n_estimators=100) 
 clf3 = clf3.fit(x_train, y_train)
 
+#XGBoost Classifier
+clf4 = XGBClassifier(random_state = 42, learning_rate=0.02, n_estimators=300) 
+clf4 = clf3.fit(x_train, y_train)
+
 
 # feed = df[['Logical quotient rating', 'coding skills rating', 'hackathons', 'public speaking points', 'self-learning capability?','Extra-courses did', 
 #            'Taken inputs from seniors or elders', 'worked in teams ever?', 'Introvert', 'reading and writing skills', 'memory capability score',  
@@ -91,6 +96,12 @@ file2.close()
 file3 = open('pkl/model3.pkl', 'wb') 
 pickle.dump(clf3, file3)
 file3.close()
+
+# XGBoost Model
+file4 = open('pkl/model4.pkl', 'wb') 
+pickle.dump(clf4, file4)
+file4.close()
+
 
 print("All Model Building Done!")
 
