@@ -4,14 +4,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix,accuracy_score
-from sklearn import tree,svm
-from sklearn.ensemble import RandomForestClassifier
 import pickle 
-from PIL import Image
 import time
 import streamlit as st
+from db import *
 
 pickleFile=open("weights.pkl","rb")
 regressor=pickle.load(pickleFile) # our model
@@ -152,10 +148,14 @@ import numpy as np
 array = np.array([1,2,3,4])
 array.reshape(-1,1)
 
-def inputlist(Name,Contact_Number,Email_address,Logical_quotient_rating, coding_skills_rating, hackathons, public_speaking_points, self_learning_capability, 
-       Extra_courses_did, Taken_inputs_from_seniors_or_elders,worked_in_teams_ever,Introvert, reading_and_writing_skills,
-       memory_capability_score, smart_or_hard_work, Management_or_Techinical,
-       Interested_subjects, Interested_Type_of_Books,certifications, workshops, Type_of_company_want_to_settle_in, interested_career_area):
+def inputlist(Name,Contact_Number,Email_address,
+      Logical_quotient_rating, coding_skills_rating, hackathons, 
+      public_speaking_points, self_learning_capability, 
+      Extra_courses_did, Taken_inputs_from_seniors_or_elders,
+      worked_in_teams_ever,Introvert, reading_and_writing_skills,
+      memory_capability_score, smart_or_hard_work, Management_or_Techinical,
+      Interested_subjects, Interested_Type_of_Books,certifications, workshops, 
+      Type_of_company_want_to_settle_in, interested_career_area):
   #1,1,1,1,'Yes','Yes''Yes''Yes''Yes',"poor","poor","Smart worker", "Management","programming","Series","information security"."testing","BPA","testing"
   Afeed = [Logical_quotient_rating, coding_skills_rating, hackathons, public_speaking_points]
 
@@ -265,14 +265,14 @@ def inputlist(Name,Contact_Number,Email_address,Logical_quotient_rating, coding_
   return(output)
 
 def main():
-  
+
   # with st.spinner('Wait for it...'):
   #     time.sleep(5)
   # st.success('Done!')
 
   html1="""
     <div style="text-align:center; text-shadow: 3px 1px 2px purple;">
-      <h2>👨🏻‍💻 Career Path Prediction app 👨🏻‍💻</h2>
+      <h1>👨🏻‍💻 Career Path Prediction app 👨🏻‍💻</h1>
     </div>
       """
   st.markdown(html1,unsafe_allow_html=True) #simple html 
@@ -305,8 +305,11 @@ def main():
 
   Email_address = st.sidebar.text_input("Email address")
 
+  if not Name and Email_address:
+    st.sidebar.warning("Please fill out your name and EmailID")
+
   if Name and Contact_Number and Email_address:
-    st.sidebar.write("Thanks!")
+    st.sidebar.success("Thanks!")
 
   Logical_quotient_rating = st.slider(
     'Rate your Logical quotient Skills', 0,10,1)
@@ -417,16 +420,17 @@ def main():
   result=""
   
   if st.button("Predict"):
-    result=inputlist(Name,Contact_Number,Email_address,Logical_quotient_rating, coding_skills_rating, hackathons, public_speaking_points, self_learning_capability,Extra_courses_did, 
+    result=inputlist(Name,Contact_Number,Email_address,Logical_quotient_rating, coding_skills_rating, hackathons, 
+                    public_speaking_points, self_learning_capability,Extra_courses_did, 
                      Taken_inputs_from_seniors_or_elders,worked_in_teams_ever, Introvert,
                      reading_and_writing_skills,memory_capability_score, smart_or_hard_work, 
-                     Management_or_Techinical,Interested_subjects, Interested_Type_of_Books,certifications, 
-                     workshops, Type_of_company_want_to_settle_in, interested_career_area) 
+                     Management_or_Techinical,Interested_subjects, Interested_Type_of_Books,
+                     certifications, workshops, Type_of_company_want_to_settle_in, interested_career_area) 
 
     # Progress bar
     my_bar = st.progress(0)
     for percent_complete in range(100):
-        time.sleep(0.001)
+        time.sleep(0.05)
         my_bar.progress(percent_complete + 1)
 
     # Balloons
@@ -451,6 +455,25 @@ def main():
          The plot above shows the correlation of the features.
          As we can see, no highly correlated pair is found!
      """)
+
+    create_table()
+    add_data(Name,Contact_Number,Email_address,Logical_quotient_rating, coding_skills_rating, hackathons, 
+            public_speaking_points, self_learning_capability,Extra_courses_did, 
+            Taken_inputs_from_seniors_or_elders,worked_in_teams_ever, Introvert,
+            reading_and_writing_skills,memory_capability_score, smart_or_hard_work, 
+            Management_or_Techinical,Interested_subjects, Interested_Type_of_Books,
+            certifications, workshops, Type_of_company_want_to_settle_in, interested_career_area)
+
+  # if choice == "Add Post":
+  #     st.subheader("Add Your Article")
+  #     create_table()
+  #     blog_title = st.text_input('Enter Post Title')
+  #     blog_author = st.text_input("Enter Author Name",max_chars=50)
+  #     blog_article = st.text_area("Enter Your Message",height=200)
+  #     blog_post_date = st.date_input("Post Date")
+  #     if st.button("Add"):
+  #       add_data(blog_author,blog_title,blog_article,blog_post_date)
+  #       st.success("Post::'{}' Saved".format(blog_title))
 
   html3="""
 
