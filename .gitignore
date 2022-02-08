@@ -1,2 +1,6 @@
 .ipynb_checkpoints/
+*.vscode
 /CBRS_KNN
+/Procfile
+*.sh
+/__pycache__
