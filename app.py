@@ -72,7 +72,8 @@ df.sort_values(by=['certifications'])
 print("List of Numerical features: \n" , df.select_dtypes(include=np.number).columns.tolist())
 
 
-category_cols = df[['certifications', 'workshops', 'Interested subjects', 'interested career area ', 'Type of company want to settle in?', 
+category_cols = df[['certifications', 'workshops', 'Interested subjects', 'interested career area ', 
+                    'Type of company want to settle in?', 
                     'Interested Type of Books']]
 for i in category_cols:
   print(i)
@@ -159,7 +160,10 @@ def inputlist(Name,Contact_Number,Email_address,
   #1,1,1,1,'Yes','Yes''Yes''Yes''Yes',"poor","poor","Smart worker", "Management","programming","Series","information security"."testing","BPA","testing"
   Afeed = [Logical_quotient_rating, coding_skills_rating, hackathons, public_speaking_points]
 
-  input_list_col = [self_learning_capability,Extra_courses_did,Taken_inputs_from_seniors_or_elders,worked_in_teams_ever,Introvert,reading_and_writing_skills,memory_capability_score,smart_or_hard_work,Management_or_Techinical,Interested_subjects,Interested_Type_of_Books,certifications,workshops,Type_of_company_want_to_settle_in,interested_career_area]
+  input_list_col = [self_learning_capability,Extra_courses_did,Taken_inputs_from_seniors_or_elders,
+                    worked_in_teams_ever,Introvert,reading_and_writing_skills,memory_capability_score,
+                    smart_or_hard_work,Management_or_Techinical,Interested_subjects,Interested_Type_of_Books,
+                    certifications,workshops,Type_of_company_want_to_settle_in,interested_career_area]
   feed = []
   K=0
   j=0
@@ -383,31 +387,38 @@ def main():
 
   Interested_subjects = st.selectbox(
     'Interested Subjects',
-    ('programming', 'Management', 'data engineering', 'networks', 'Software Engineering', 'cloud computing', 'parallel computing', 'IOT', 'Computer Architecture', 'hacking')
+    ('programming', 'Management', 'data engineering', 'networks', 'Software Engineering', 'cloud computing', 
+    'parallel computing', 'IOT', 'Computer Architecture', 'hacking')
     )
   st.write('You selected: **{}**' .format(Interested_subjects))
 
   Interested_Type_of_Books = st.selectbox(
     'Interested Books Category',
-    ('Series', 'Autobiographies', 'Travel', 'Guide', 'Health', 'Journals', 'Anthology', 'Dictionaries', 'Prayer books', 'Art', 'Encyclopedias', 'Religion-Spirituality', 'Action and Adventure', 'Comics', 'Horror', 'Satire', 'Self help', 'History', 'Cookbooks', 'Math', 'Biographies', 'Drama', 'Diaries', 'Science fiction', 'Poetry', 'Romance', 'Science', 'Trilogy', 'Fantasy', 'Childrens', 'Mystery')
+    ('Series', 'Autobiographies', 'Travel', 'Guide', 'Health', 'Journals', 'Anthology', 'Dictionaries', 
+    'Prayer books', 'Art', 'Encyclopedias', 'Religion-Spirituality', 'Action and Adventure', 'Comics', 
+    'Horror', 'Satire', 'Self help', 'History', 'Cookbooks', 'Math', 'Biographies', 'Drama', 'Diaries', 
+    'Science fiction', 'Poetry', 'Romance', 'Science', 'Trilogy', 'Fantasy', 'Childrens', 'Mystery')
     )
   st.write('You selected: **{}**' .format(Interested_Type_of_Books))
 
   certifications = st.selectbox(
     'Interested_Type_of_Books',
-    ('information security', 'shell programming', 'r programming', 'distro making', 'machine learning', 'full stack', 'hadoop', 'app development', 'python')
+    ('information security', 'shell programming', 'r programming', 'distro making', 'machine learning', 
+    'full stack', 'hadoop', 'app development', 'python')
     )
   st.write('You selected: **{}**' .format(certifications))
 
   workshops = st.selectbox(
     'Workshops Attended',
-    ('Testing', 'database security', 'game development', 'data science', 'system designing', 'hacking', 'cloud computing', 'web technologies')
+    ('Testing', 'database security', 'game development', 'data science', 'system designing', 'hacking', 
+    'cloud computing', 'web technologies')
     )
   st.write('You selected: **{}**' .format(workshops))
   
   Type_of_company_want_to_settle_in = st.selectbox(
     'Type of Company You Want to Settle In ',
-    ('BPA', 'Cloud Services', 'product development', 'Testing and Maintainance Services', 'SAaS services', 'Web Services', 'Finance', 'Sales and Marketing', 'Product based', 'Service Based')
+    ('BPA', 'Cloud Services', 'product development', 'Testing and Maintainance Services', 'SAaS services', 
+    'Web Services', 'Finance', 'Sales and Marketing', 'Product based', 'Service Based')
     )
   st.write('You selected: **{}**' .format(Type_of_company_want_to_settle_in))
   
