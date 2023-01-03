@@ -12,4 +12,5 @@ pandas
 flasgger
 streamlit
 seaborn
+scikit-learn
 
